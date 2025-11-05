@@ -40,6 +40,13 @@ AVAILABLE_LLMs = {
         "api_version": Configs.AZURE_API_VERSION,
         "provider": "azure",
     },
+    "azure-gpt-5-mini": {
+        "api_key": Configs.AZURE_OPENAI_KEY,
+        "model": "gpt-5-mini",  # Azure deployment name
+        "endpoint": Configs.AZURE_OPENAI_ENDPOINT,
+        "api_version": Configs.AZURE_API_VERSION,
+        "provider": "azure",
+    },
     "azure-o3-mini": {
         "api_key": Configs.AZURE_OPENAI_KEY,
         "model": "o3-mini",  # Azure deployment name

@@ -41,6 +41,13 @@ AVAILABLE_LLMs = {
         "api_version": Configs.AZURE_API_VERSION,
         "provider": "azure",
     },
+    "azure-gpt-5-mini": {
+        "api_key": Configs.AZURE_OPENAI_KEY,
+        "model": "your-gpt5-mini-deployment-name",  # ← Change this
+        "endpoint": Configs.AZURE_OPENAI_ENDPOINT,
+        "api_version": Configs.AZURE_API_VERSION,
+        "provider": "azure",
+    },
     "azure-o3-mini": {
         "api_key": Configs.AZURE_OPENAI_KEY,
         "model": "your-o3-mini-deployment-name",  # ← Change this
@@ -58,15 +65,15 @@ Create a file `my_first_automl.py`:
 ```python
 from agent_manager import AgentManager
 
-# Initialize with Azure GPT-4-mini
+# Initialize with Azure GPT-5-mini
 manager = AgentManager(
-    llm='azure-gpt-4-mini',
-    interactive=False,
-    data_path="path/to/your/data.csv"
+    llm='azure-gpt-5-mini',  # Select the Azure GPT-5-mini deployment
+    interactive=False,  # Run without interactive refinements
+    data_path="path/to/your/data.csv"  # Point to the dataset location
 )
 
 # Start AutoML
-manager.initiate_chat(
+manager.initiate_chat(  # Launch the AutoML workflow
     prompt="Build a classification model for this dataset"
 )
 ```
@@ -105,8 +112,8 @@ manager.initiate_chat("Build an image classifier with transfer learning")
 
 **Time Series Forecasting:**
 ```python
-manager = AgentManager(llm='azure-gpt-4-mini', data_path="sales.csv")
-manager.initiate_chat("Forecast sales for the next 30 days")
+manager = AgentManager(llm='azure-gpt-5-mini', data_path="sales.csv")  # Use GPT-5-mini for richer forecasting plans
+manager.initiate_chat("Forecast sales for the next 30 days")  # Request a 30-day forecast pipeline
 ```
 
 **Text Classification:**
@@ -120,7 +127,7 @@ manager.initiate_chat("Build a sentiment analysis model")
 **Generate Multiple Plans:**
 ```python
 manager = AgentManager(
-    llm='azure-gpt-4-mini',
+    llm='azure-gpt-4-mini',  # Favor GPT-4-mini when cost efficiency is preferred
     n_plan=5,  # Generate 5 different solution approaches
     top_k=3    # Consider top 3 models
 )
@@ -129,7 +136,7 @@ manager = AgentManager(
 **Interactive Mode:**
 ```python
 manager = AgentManager(
-    llm='azure-gpt-4-mini',
+    llm='azure-gpt-4-mini',  # Keep GPT-4-mini for conversational guidance during interaction
     interactive=True  # Ask for user feedback during process
 )
 ```
@@ -164,7 +171,7 @@ HF_KEY = "your_huggingface_token"
 
 1. **Start Simple**: Begin with small datasets to test the system
 2. **Clear Prompts**: Be specific about what you want (e.g., "optimize for accuracy" vs "optimize for speed")
-3. **Monitor Costs**: Azure OpenAI charges per token - use GPT-4-mini for cost efficiency
+3. **Monitor Costs**: Azure OpenAI charges per token - use GPT-4-mini for cost efficiency and GPT-5-mini when you need higher quality
 4. **Use o3-mini**: For complex reasoning tasks requiring multi-step planning
 5. **Check Logs**: Review `agent_workspace/logs/` if something goes wrong
 

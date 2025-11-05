@@ -1,7 +1,7 @@
 """
 AutoML Agent Example Usage with Azure OpenAI
 
-This script demonstrates how to use the AutoML Agent with Azure OpenAI GPT-4-mini and o3-mini.
+This script demonstrates how to use the AutoML Agent with Azure OpenAI GPT-4-mini, GPT-5-mini, and o3-mini.
 """
 
 from agent_manager import AgentManager
@@ -11,12 +11,12 @@ def example_tabular_classification():
     Example: Tabular data classification task
     """
     print("\n" + "="*80)
-    print("Example 1: Tabular Classification with Azure GPT-4-mini")
+    print("Example 1: Tabular Classification with Azure GPT-5-mini")
     print("="*80 + "\n")
 
     manager = AgentManager(
-        llm='azure-gpt-4-mini',  # Use Azure GPT-4-mini
-        interactive=False,
+        llm='azure-gpt-5-mini',  # Use Azure GPT-5-mini for higher-quality tabular plans
+        interactive=False,  # Disable interactive refinements for a fully automated run
         data_path="data/tabular/customer_churn.csv"  # Replace with your data path
     )
 

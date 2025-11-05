@@ -1,13 +1,13 @@
 # AutoML Agent with Azure OpenAI
 
-This is an implementation of the [AutoML Agent paper](https://arxiv.org/abs/2410.02958) with support for **Azure OpenAI GPT-4-mini and o3-mini** models.
+This is an implementation of the [AutoML Agent paper](https://arxiv.org/abs/2410.02958) with support for **Azure OpenAI GPT-4-mini, GPT-5-mini, and o3-mini** models.
 
 AutoML Agent is a multi-agent LLM framework that automates the complete machine learning pipeline, from data exploration to model deployment. The system orchestrates specialized agents to handle distinct phases of AutoML workflows.
 
 ## 🌟 Features
 
 - **Multi-Agent Architecture**: Specialized agents for data processing, model selection, and operations
-- **Azure OpenAI Integration**: Native support for Azure OpenAI GPT-4-mini and o3-mini
+- **Azure OpenAI Integration**: Native support for Azure OpenAI GPT-4-mini, GPT-5-mini, and o3-mini
 - **Full Pipeline Automation**: End-to-end ML workflow from data to deployment
 - **Multiple Data Modalities**: Support for tabular, image, text, graph, and time-series data
 - **Knowledge Retrieval**: Integrated RAG (Retrieval-Augmented Generation) from Kaggle, arXiv, PapersWithCode
@@ -27,7 +27,7 @@ The system consists of four specialized agents:
 ## 📋 Prerequisites
 
 - Python 3.11+
-- Azure OpenAI account with GPT-4-mini and/or o3-mini deployments
+- Azure OpenAI account with GPT-4-mini, GPT-5-mini, and/or o3-mini deployments
 - (Optional) Kaggle, HuggingFace, and other API keys for dataset/model retrieval
 
 ## 🚀 Installation
@@ -92,6 +92,13 @@ AVAILABLE_LLMs = {
         "api_version": Configs.AZURE_API_VERSION,
         "provider": "azure",
     },
+    "azure-gpt-5-mini": {
+        "api_key": Configs.AZURE_OPENAI_KEY,
+        "model": "gpt-5-mini",  # Your Azure deployment name
+        "endpoint": Configs.AZURE_OPENAI_ENDPOINT,
+        "api_version": Configs.AZURE_API_VERSION,
+        "provider": "azure",
+    },
     "azure-o3-mini": {
         "api_key": Configs.AZURE_OPENAI_KEY,
         "model": "o3-mini",  # Your Azure deployment name
@@ -102,7 +109,7 @@ AVAILABLE_LLMs = {
 }
 ```
 
-**Important**: Replace `"gpt-4-mini"` and `"o3-mini"` with your actual Azure deployment names.
+**Important**: Replace `"gpt-4-mini"`, `"gpt-5-mini"`, and `"o3-mini"` with your actual Azure deployment names.
 
 ## 📖 Usage
 
@@ -111,15 +118,15 @@ AVAILABLE_LLMs = {
 ```python
 from agent_manager import AgentManager
 
-# Initialize the AgentManager with Azure OpenAI GPT-4-mini
+# Initialize the AgentManager with Azure OpenAI GPT-5-mini
 manager = AgentManager(
-    llm='azure-gpt-4-mini',
-    interactive=False,
-    data_path="path/to/your/dataset.csv"
+    llm='azure-gpt-5-mini',  # Select the Azure GPT-5-mini deployment
+    interactive=False,  # Run in non-interactive mode for automated execution
+    data_path="path/to/your/dataset.csv"  # Provide the dataset location
 )
 
 # Start the AutoML workflow
-manager.initiate_chat(
+manager.initiate_chat(  # Launch the AutoML Agent conversation
     prompt="Build a classification model to predict customer churn using this dataset"
 )
 ```
@@ -148,7 +155,7 @@ from agent_manager import AgentManager
 
 # Initialize with custom settings
 manager = AgentManager(
-    llm='azure-gpt-4-mini',
+    llm='azure-gpt-4-mini',  # Use Azure GPT-4-mini for vision-focused workflows
     interactive=True,  # Enable interactive mode for user feedback
     data_path="data/images/",
     n_plan=5,  # Generate 5 different solution plans
