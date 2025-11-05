@@ -7,7 +7,7 @@ All notable changes to the AutoML Agent Azure implementation will be documented 
 ### Added
 
 #### Azure OpenAI Integration
-- ✨ Native support for Azure OpenAI GPT-4-mini and o3-mini models
+- ✨ Native support for Azure OpenAI GPT-4-mini, GPT-5-mini, and o3-mini models
 - 🔧 Updated `configs.py` with Azure OpenAI configuration parameters
 - 🔧 Modified `utils/get_client()` to support AzureOpenAI client initialization
 - 📝 Added provider field to LLM configurations for multi-provider support
@@ -58,14 +58,21 @@ All notable changes to the AutoML Agent Azure implementation will be documented 
 AVAILABLE_LLMs = {
     "azure-gpt-4-mini": {
         "api_key": Configs.AZURE_OPENAI_KEY,
-        "model": "gpt-4-mini",
+        "model": "gpt-4-mini",  # Azure GPT-4-mini deployment name
+        "endpoint": Configs.AZURE_OPENAI_ENDPOINT,
+        "api_version": Configs.AZURE_API_VERSION,
+        "provider": "azure",
+    },
+    "azure-gpt-5-mini": {
+        "api_key": Configs.AZURE_OPENAI_KEY,
+        "model": "gpt-5-mini",  # Azure GPT-5-mini deployment name
         "endpoint": Configs.AZURE_OPENAI_ENDPOINT,
         "api_version": Configs.AZURE_API_VERSION,
         "provider": "azure",
     },
     "azure-o3-mini": {
         "api_key": Configs.AZURE_OPENAI_KEY,
-        "model": "o3-mini",
+        "model": "o3-mini",  # Azure o3-mini deployment name
         "endpoint": Configs.AZURE_OPENAI_ENDPOINT,
         "api_version": Configs.AZURE_API_VERSION,
         "provider": "azure",
